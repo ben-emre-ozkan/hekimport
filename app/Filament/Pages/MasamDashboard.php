@@ -12,6 +12,9 @@ class MasamDashboard extends Dashboard
     protected static string $view = 'filament.pages.masam-dashboard';
     protected static ?string $title = 'Masam';
     
+    // Set the slug for the dashboard explicitly
+    protected static ?string $slug = 'dashboard';
+    
     public function getHeaderWidgets(): array
     {
         return [

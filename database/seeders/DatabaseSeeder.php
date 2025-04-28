@@ -24,5 +24,9 @@ class DatabaseSeeder extends Seeder
 
         // Assign admin role to test user
         $user->assignRole('admin');
+
+        $this->call([
+            DoctorSeeder::class,
+        ]);
     }
 }

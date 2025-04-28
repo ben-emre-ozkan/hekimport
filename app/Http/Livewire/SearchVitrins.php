@@ -27,11 +27,21 @@ class SearchVitrins extends Component
     public function mount()
     {
         $this->cities = Cache::remember('vitrin_cities', 3600, fn() => 
-            Vitrin::distinct()->pluck('city')->filter()->values()->toArray()
+            Vitrin::distinct()
+                ->pluck('content->location->city')
+                ->filter()
+                ->values()
+                ->toArray()
         );
         
         $this->specialties = Cache::remember('vitrin_specialties', 3600, fn() => 
-            Vitrin::distinct()->pluck('specialty')->filter()->values()->toArray()
+            Vitrin::distinct()
+                ->pluck('content->specialties')
+                ->flatten()
+                ->unique()
+                ->filter()
+                ->values()
+                ->toArray()
         );
     }
 
@@ -55,24 +65,7 @@ class SearchVitrins extends Component
 
     public function render()
     {
-        $query = Vitrin::query();
-
-        if ($this->query) {
-            $query->where(function($q) {
-                $q->where('name', 'like', '%' . $this->query . '%')
-                  ->orWhere('specialty', 'like', '%' . $this->query . '%');
-            });
-        }
-
-        if ($this->city) {
-            $query->where('city', $this->city);
-        }
-
-        if ($this->specialty) {
-            $query->where('specialty', $this->specialty);
-        }
-
-        $vitrins = $query->paginate(10);
+        $vitrins = Vitrin::search($this->query, $this->city, $this->specialty);
         $this->loading = false;
 
         return view('livewire.search-vitrins', [

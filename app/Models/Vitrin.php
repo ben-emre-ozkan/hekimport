@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Vitrin extends Model
+class Vitrin extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,7 +21,15 @@ class Vitrin extends Model
         'user_id',
         'student_id',
         'subdomain',
+        'title',
+        'description',
+        'image',
         'content',
+        'working_hours',
+        'services',
+        'social_media',
+        'contact_info',
+        'custom_slug',
         'clinic_id',
         'is_active',
     ];
@@ -29,6 +41,10 @@ class Vitrin extends Model
      */
     protected $casts = [
         'content' => 'array',
+        'working_hours' => 'array',
+        'services' => 'array',
+        'social_media' => 'array',
+        'contact_info' => 'array',
         'is_active' => 'boolean',
     ];
 
@@ -84,5 +100,37 @@ class Vitrin extends Model
         }
 
         return $searchQuery->where('is_active', true)->paginate(10);
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->content['name'] ?? $this->subdomain;
+    }
+
+    public function getBioAttribute()
+    {
+        return $this->content['bio'] ?? '';
+    }
+
+    public function getCityAttribute()
+    {
+        return $this->content['location']['city'] ?? '';
+    }
+
+    public function getSpecialtyAttribute()
+    {
+        return $this->content['specialties'][0] ?? '';
+    }
+
+    /**
+     * Register media collections for the model.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('profile_photos')
+            ->singleFile();
+            
+        $this->addMediaCollection('gallery')
+            ->useDisk('public');
     }
 }
