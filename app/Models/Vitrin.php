@@ -1,15 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Manipulations;
 
 class Vitrin extends Model implements HasMedia
 {
+    use HasFactory;
     use InteractsWithMedia;
 
     /**
@@ -73,6 +79,22 @@ class Vitrin extends Model implements HasMedia
     }
 
     /**
+     * Get the appointment requests for the vitrin.
+     */
+    public function appointmentRequests(): HasMany
+    {
+        return $this->hasMany(AppointmentRequest::class);
+    }
+
+    /**
+     * Get the visits for the vitrin profile.
+     */
+    public function visits()
+    {
+        return $this->hasMany(ProfileVisit::class);
+    }
+
+    /**
      * Scope a query to only include active vitrins.
      */
     public function scopeActive($query)
@@ -128,9 +150,51 @@ class Vitrin extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('profile_photos')
-            ->singleFile();
+            ->singleFile()
+            ->registerMediaConversions(function (Media $media) {
+                $this->addMediaConversion('thumb')
+                    ->width(100)
+                    ->height(100)
+                    ->sharpen(10)
+                    ->optimize()
+                    ->format(Manipulations::FORMAT_WEBP);
+                    
+                $this->addMediaConversion('medium')
+                    ->width(300)
+                    ->height(300)
+                    ->sharpen(10)
+                    ->optimize()
+                    ->format(Manipulations::FORMAT_WEBP);
+            });
             
         $this->addMediaCollection('gallery')
-            ->useDisk('public');
+            ->useDisk('public')
+            ->registerMediaConversions(function (Media $media) {
+                $this->addMediaConversion('thumb')
+                    ->width(300)
+                    ->height(300)
+                    ->sharpen(10)
+                    ->optimize()
+                    ->format(Manipulations::FORMAT_WEBP);
+                    
+                $this->addMediaConversion('medium')
+                    ->width(800)
+                    ->height(800)
+                    ->sharpen(10)
+                    ->optimize()
+                    ->format(Manipulations::FORMAT_WEBP);
+            });
+            
+        $this->addMediaCollection('documents')
+            ->useDisk('public')
+            ->acceptsMimeTypes([
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'image/jpeg',
+                'image/png',
+            ]);
     }
 }

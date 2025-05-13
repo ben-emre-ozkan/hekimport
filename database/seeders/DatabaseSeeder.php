@@ -26,7 +26,10 @@ class DatabaseSeeder extends Seeder
         $user->assignRole('admin');
 
         $this->call([
-            DoctorSeeder::class,
+            // DoctorSeeder::class, // Removed in favor of DummyDentistsSeeder
+            DummyDentistsSeeder::class, // Add our new dummy dentists seeder
+            ForumCategorySeeder::class, // Ensure forum categories are seeded
+            SimpleForumSeeder::class, // Add forum content using our dummy dentists (simpler version)
         ]);
     }
 }

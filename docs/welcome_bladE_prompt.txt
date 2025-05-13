@@ -1,0 +1,31 @@
+Phase 1: Setup & Foundation
+Review and configure vite.config.js to ensure it correctly processes TailwindCSS and Alpine.js imports from resources/css/app.css and resources/js/app.js.
+Configure tailwind.config.js: Define the project's color palette (primary, secondary, accent, text, background colors based on provided scheme: #00c8b3 to #0099e5 gradient, etc.), setup custom fonts (Orbitron for headings, Inter for body), and ensure the theme settings are applied correctly.
+Create base layout files: Generate resources/views/layouts/app.blade.php and resources/views/layouts/guest.blade.php. Include basic HTML structure, head section with meta tags (charset, viewport, csrf-token), title tag, links for Vite assets (app.css, app.js), and a {{ $slot }} placeholder for content.
+Create core Blade components: Generate resources/views/components/header.blade.php and resources/views/components/footer.blade.php. Move the existing header and footer HTML structure from welcome.blade.php into these respective component files.
+Integrate core components into layouts: Update resources/views/layouts/app.blade.php to include the <x-header /> and <x-footer /> components around the {{ $slot }}.
+
+
+Phase 2: Refactoring Welcome Page & Static Content
+Refactor welcome.blade.php: Modify resources/views/welcome.blade.php to extend the 'layouts.app'. Remove the header, footer, head section, and script/style links (as they are now in the layout). Keep only the main content sections (Hero, Featured Doctors, Why Us).
+Extract Hero Section: Create a Blade component resources/views/components/hero-section.blade.php. Move the entire hero section HTML block from welcome.blade.php into this component. Replace inline CSS with Tailwind utility classes. Ensure semantic HTML and basic accessibility attributes (e.g., alt text for images) are used.
+Extract "Why Us" / Feature Cards: Create a Blade component resources/views/components/feature-card.blade.php (or a more specific name like 'why-us-card'). Move the repeating feature/card structure from the "Why Hekimport?" section into this component. Refactor the welcome.blade.php loop to use this component. Replace inline CSS with Tailwind utilities.
+Integrate static components: Update resources/views/welcome.blade.php to use the newly created components like <x-hero-section /> and the loop for <x-feature-card />.
+
+
+Phase 3: Interactive & Dynamic Components
+Extract Search Form (Static): Create a Blade component resources/views/components/search-form.blade.php. Move the search form HTML (both desktop and mobile versions) from the hero section component into this new component. Replace inline styles with Tailwind. Integrate <x-search-form /> back into <x-hero-section />.
+Refactor Mobile Menu (Alpine.js): Move the existing Alpine.js logic for the mobile menu toggle from welcome.blade.php into a dedicated JavaScript file, e.g., resources/js/components/mobile-menu.js. Import and initialize this component in resources/js/app.js. Ensure the HTML in components/header.blade.php uses the appropriate x-data and event listeners.
+Refactor Search Form Combobox (Alpine.js): Move the existing Alpine.js 'combobox' function and its initialization from welcome.blade.php (or hero/search components) into a dedicated file, e.g., resources/js/components/combobox.js. Import and initialize this in resources/js/app.js. Update the search form component HTML (components/search-form.blade.php) to use the Alpine component correctly.
+Create Livewire Component for Featured Doctors: Run 'php artisan make:livewire FeaturedDoctors'. Move the logic for fetching doctors (currently in the controller passing data to welcome.blade.php) into the 'FeaturedDoctors' Livewire component class. Move the doctor card loop and structure from welcome.blade.php into the Livewire component's view (resources/views/livewire/featured-doctors.blade.php). Use the <x-doctor-card /> component (create if not already done) within the Livewire view.
+Integrate Livewire Component: Replace the static doctor list section in resources/views/welcome.blade.php with the Livewire component tag: <livewire:featured-doctors />.
+Write Livewire Tests: Create feature tests for the 'FeaturedDoctors' Livewire component to verify it renders correctly and displays doctor information.
+
+
+Phase 4: Localization, Optimization & Final Touches
+Implement Localization: Create resources/lang/tr/welcome.php. Move all user-facing strings from welcome.blade.php and its components (header, footer, hero, etc.) into this language file using appropriate keys. Update the Blade templates to use the __() helper function (e.g., {{ __('welcome.hero_title') }}).
+Optimize SEO Meta Tags: Enhance the <head> section in resources/views/layouts/app.blade.php. Add dynamic title capabilities (e.g., using @yield('title') or a View Composer). Add meta description, Open Graph, and Twitter Card tags.
+Optimize Performance: Review TailwindCSS purge settings in tailwind.config.js. Optimize images (consider using laravel-medialibrary conversions or manual optimization). Verify asset compilation with Vite (npm run build).
+Write Feature/Integration Tests: Create comprehensive feature tests for the main welcome page flow, ensuring all sections load correctly and the search form submits as expected.
+Code Cleanup & Refactoring: Remove any remaining inline styles or <style> blocks. Delete unused CSS or JS code. Ensure consistent naming conventions and code formatting (PSR-12).
+Update Documentation: Document the new Blade and Alpine components (props, usage) in the project's README or relevant documentation files.

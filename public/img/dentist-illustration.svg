@@ -1,0 +1,46 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dental Chair Base -->
+    <rect x="40" y="130" width="120" height="20" rx="5" fill="#00c8b3" />
+    
+    <!-- Chair Support -->
+    <rect x="70" y="150" width="60" height="10" rx="2" fill="#0099e5" />
+    
+    <!-- Chair Seat -->
+    <rect x="55" y="85" width="90" height="45" rx="5" fill="#c4f1ff" />
+    
+    <!-- Chair Back -->
+    <rect x="55" y="40" width="90" height="45" rx="5" fill="#c4f1ff" />
+    
+    <!-- Chair Headrest -->
+    <rect x="75" y="30" width="50" height="10" rx="5" fill="#c4f1ff" />
+    
+    <!-- Dentist -->
+    <circle cx="140" cy="60" r="20" fill="#eaeaea" /> <!-- Head -->
+    <rect x="130" y="80" width="20" height="40" fill="#ffffff" /> <!-- Coat -->
+    <rect x="130" y="80" width="20" height="10" fill="#00c8b3" /> <!-- Collar -->
+    
+    <!-- Patient -->
+    <circle cx="85" cy="60" r="15" fill="#f0d0b4" /> <!-- Head -->
+    <rect x="70" y="75" width="30" height="10" fill="#eaeaea" /> <!-- Body -->
+    
+    <!-- Dental Light -->
+    <circle cx="110" cy="30" r="10" fill="#ffff99" />
+    <rect x="105" y="10" width="10" height="15" rx="2" fill="#cccccc" />
+    
+    <!-- Tools -->
+    <line x1="120" y1="70" x2="100" y2="65" stroke="#cccccc" stroke-width="2" />
+    
+    <!-- Gradient Overlay -->
+    <rect x="40" y="30" width="120" height="140" rx="10" fill="url(#paint0_linear)" fill-opacity="0.1" />
+    
+    <!-- Dental Symbol -->
+    <path d="M100 180 L95 175 L100 170 L105 175 Z" fill="#0099e5" />
+    <path d="M100 170 L95 165 L100 160 L105 165 Z" fill="#00c8b3" />
+    
+    <defs>
+        <linearGradient id="paint0_linear" x1="40" y1="30" x2="160" y2="170" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00c8b3" />
+            <stop offset="1" stop-color="#0099e5" />
+        </linearGradient>
+    </defs>
+</svg> 

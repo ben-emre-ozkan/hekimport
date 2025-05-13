@@ -1,0 +1,73 @@
+---
+description: Comprehensive list of project dependencies and documentation links for Hekimport.
+globs: 
+alwaysApply: false
+---
+---
+description: Comprehensive list of project dependencies and documentation links for Hekimport.
+---
+
+### Project Dependencies and Documentation
+
+#### Backend Framework and Packages
+- **PHP 8.3**
+  - Features and Documentation: https://www.php.net/manual/en/migration83.php
+  - New Features in PHP 8.3: https://www.php.net/releases/8.3/en.php
+- **Laravel 12**
+  - Official Documentation (v12.x): https://laravel.com/docs/12.x
+  - Upgrade Guide: https://laravel.com/docs/12.x/upgrade
+- **Livewire 3.x**
+  - Official Documentation: https://livewire.laravel.com/docs
+  - Installation: https://livewire.laravel.com/docs/installation
+  - Upgrade Guide: https://livewire.laravel.com/docs/upgrading
+- **Spatie Laravel Medialibrary 11.x**
+  - Official Documentation: https://spatie.be/docs/laravel-medialibrary/v11/introduction
+- **Unisharp Laravel Filemanager 2.x**
+  - Official Documentation: https://github.com/UniSharp/laravel-filemanager
+
+#### Frontend Framework and Tools
+- **Tailwind CSS 3.x**
+  - Official Documentation: https://tailwindcss.com/docs
+  - Laravel Integration: https://tailwindcss.com/docs/guides/laravel
+- **Alpine.js 3.x**
+  - Official Documentation: https://alpinejs.dev/start-here
+
+#### Development Tools
+- **Laravel Dusk**
+  - Official Documentation: https://laravel.com/docs/12.x/dusk
+- **PHPUnit 11.x**
+  - Official Documentation: https://phpunit.de/documentation.html
+- **FakerPHP**
+  - Official Documentation: https://fakerphp.github.io/
+
+#### General Tools
+- **Composer**
+  - Official Documentation: https://getcomposer.org/doc/
+- **NPM**
+  - Official Documentation: https://docs.npmjs.com/
+
+### Dependency List
+#### Backend Dependencies
+- "php": "^8.3"
+- "laravel/framework": "^12.0"
+- "livewire/livewire": "^3.0"
+- "spatie/laravel-medialibrary": "^11.12"
+- "unisharp/laravel-filemanager": "^2.10"
+
+#### Development Dependencies (require-dev)
+- "laravel/dusk": "^7.0" (for end-to-end testing)
+- "fakerphp/faker": "^1.23"
+- "phpunit/phpunit": "^11.5.3"
+
+#### Frontend Dependencies (package.json devDependencies)
+- "alpinejs": "^3.4.2" (Minimalist JavaScript Framework)
+- "autoprefixer": "^10.4.2" (CSS Prefixer)
+- "postcss": "^8.4.31" (CSS Processing Tool)
+- "tailwindcss": "^3.1.0" (Utility-First CSS Framework)
+- "vite": "^6.2.4" (Frontend Build Tool)
+
+### Usage Instructions
+- Use the above dependencies and documentation links as a reference for development.
+- Ensure that all dependencies are up-to-date by running `composer update` and `npm update`.
+- Refer to the documentation links for detailed guidance on each package or tool.
+- When implementing features, adhere to the project’s coding standards and best practices as defined in the Project Rules (`/.cursor/rules`).

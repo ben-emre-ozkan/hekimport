@@ -24,10 +24,6 @@
             "url": "https://spatie.be/docs/laravel-permission"
           },
           {
-            "name": "Laravel Breeze Documentation",
-            "url": "https://laravel.com/docs/12.x/starter-kits#breeze"
-          },
-          {
             "name": "Laravel Scout Documentation",
             "url": "https://laravel.com/docs/12.x/scout"
           },
@@ -53,7 +49,7 @@
           },
           {
             "name": "Hekimport Project Overview",
-            "content": "# Hekimport Proje Özeti\n\n## Yapı\n- Hasta Arayüzü: hekimport.com\n- Doktor Paneli (Masam): app.hekimport.com\n- Admin Paneli: admin.hekimport.com\n\n## Kullanıcı Tipleri\n- Dentist\n- Student\n- Personel\n- Admin\n\n## Ana Modüller\n- Vitrinim\n- Kliniğim\n- Admin Yönetimi\n\n## Teknolojiler\n- Laravel 12, Breeze, Livewire, Filament, TailwindCSS\n- MySQL\n- İyziCo, SMS sağlayıcısı, Search (Meilisearch/Algolia)\n\n## Notlar\n- Kayıt sadece doktorlar içindir. Hastalar doğrudan randevu alır.\n- Stripe kullanılmayacak, iyzico ile ödeme entegre edilecek.\n- Admin paneli app.hekimport.com altında özel bir subdomain ile çalışacaktır.\n- Hasta arayüzünde hızlı arama (Scout + Meilisearch) ile doktor listeleme sağlanacaktır.\n"
+            "content": "# Hekimport Proje Özeti\n\n## Yapı\n- Hasta Arayüzü: hekimport.com\n- Doktor Paneli (Masam): app.hekimport.com\n- Admin Paneli: admin.hekimport.com\n\n## Kullanıcı Tipleri\n- Dentist\n- Student\n- Personel\n- Admin\n\n## Ana Modüller\n- Vitrinim\n- Kliniğim\n- Admin Yönetimi\n\n## Teknolojiler\n- Laravel 12, Livewire, Filament, TailwindCSS\n- MySQL\n- İyziCo, SMS sağlayıcısı, Search (Meilisearch/Algolia)\n\n## Notlar\n- Kayıt sadece doktorlar içindir. Hastalar doğrudan randevu alır.\n- Stripe kullanılmayacak, iyzico ile ödeme entegre edilecek.\n- Admin paneli app.hekimport.com altında özel bir subdomain ile çalışacaktır.\n- Hasta arayüzünde hızlı arama (Scout + Meilisearch) ile doktor listeleme sağlanacaktır.\n"
           }
         ]
       }

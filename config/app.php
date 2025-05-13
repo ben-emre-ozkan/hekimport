@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'tr'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
@@ -122,5 +122,21 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    /*
+     * Application Service Providers...
+     */
+    App\Providers\AppServiceProvider::class,
+    App\Providers\AuthServiceProvider::class,
+    // App\Providers\BroadcastServiceProvider::class,
+    App\Providers\EventServiceProvider::class,
+    App\Providers\RouteServiceProvider::class,
+    App\Providers\FortifyServiceProvider::class,
+    App\Providers\JetstreamServiceProvider::class,
+    Spatie\Permission\PermissionServiceProvider::class,
+    // App\Providers\Filament\AdminPanelProvider::class,
+    // App\Providers\Filament\DoctorPanelProvider::class,
+    // App\Providers\Filament\MasamPanelProvider::class,
+    // App\Providers\Filament\StudentPanelProvider::class,
 
 ];

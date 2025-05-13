@@ -21,3 +21,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+*.zip
+*.deb
+chromedriver-linux64/
+cookies.txt
+test-*.php
+unauthenticated

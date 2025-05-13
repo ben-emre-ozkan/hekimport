@@ -1,0 +1,52 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Comprehensive guidelines for UI development, components, and features like patient management and appointment scheduling in Hekimport.
+alwaysApply: true
+---
+### Livewire Components
+- Create modular, reusable Livewire components.
+- Use Livewire’s lifecycle hooks effectively (e.g., mount, updated).
+- Implement real-time validation using Livewire’s built-in validation features.
+- Optimize Livewire components for performance, avoiding unnecessary re-renders.
+- Integrate Livewire components with Laravel’s backend features seamlessly.
+- Implement lazy loading for Livewire components when appropriate.
+
+### Patient Management (e.g., PatientManager)
+- Implement patient management features: create/edit patient cards (name, phone, email, notes), manage patient communications (messages, appointment requests), and add patient-specific notes.
+- Use Livewire for dynamic patient lists and forms, ensuring real-time updates.
+- Integrate with Eloquent models (e.g., Patient, Vitrin) for data consistency.
+- Display patients in card format with TailwindCSS, ensuring responsive design.
+
+### Appointment Scheduling (e.g., VisibilityManager)
+- Implement appointment scheduling: manage available time slots (e.g., JSON format: {"Monday": ["09:00-10:00"]}).
+- Allow visibility settings (e.g., toggle listing on hekimport.com).
+- Use Livewire for dynamic slot management (add/remove slots).
+- Ensure user-friendly UI with TailwindCSS, including clear labels and responsive layout.
+
+### Blade Templating and Alpine.js
+- Use Laravel’s Blade templating engine for views, integrating with Livewire, Alpine.js, and FilamentPHP.
+- Use Alpine.js directives (x-data, x-bind, x-on, etc.) for declarative JavaScript functionality.
+- Implement small, focused Alpine.js components for specific UI interactions (e.g., modals, toggles).
+- Combine Alpine.js with Livewire for enhanced interactivity when necessary.
+- Keep Alpine.js logic close to the HTML it manipulates, preferably inline.
+
+### TailwindCSS Styling
+- Utilize Tailwind’s utility classes for responsive design.
+- Implement a consistent color scheme (#00c8b3 to #0099e5 gradient) and typography (Orbitron for headings, Inter for body) using Tailwind’s configuration.
+- Use Tailwind’s @apply directive in CSS files for reusable component styles (e.g., .btn-gradient, .card-hover).
+- Optimize for production by purging unused CSS classes.
+- Add subtle animations (e.g., hover effects, transitions) for a modern, creative vibe.
+- Ensure all UI elements (e.g., cards, buttons, forms) are responsive and mobile-friendly.
+- Apply hover effects (e.g., transform: scale, shadow changes) to interactive elements like buttons and cards.
+
+### FilamentPHP Integration
+- Leverage FilamentPHP for admin panels (e.g., Masam dashboard) and widgets (e.g., analytics dashboards, form builders).
+- Ensure seamless integration with Laravel and Livewire for dynamic, user-friendly interfaces.
+- Create reusable FilamentPHP widgets for analytics (e.g., visits, clicks, impressions) in the Vitrin Analizim section.
+- Style FilamentPHP components with TailwindCSS, matching the project’s aesthetic (#00c8b3 to #0099e5 gradient, Orbitron/Inter fonts).
+- Use FilamentPHP tables for displaying analytics data, with filtering and sorting capabilities.
+- Integrate with Eloquent models (e.g., VitrinAnalytic) for data consistency.

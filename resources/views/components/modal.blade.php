@@ -1,5 +1,5 @@
 @props([
-    'name',
+    'name' => null,
     'show' => false,
     'maxWidth' => '2xl'
 ])
@@ -39,14 +39,14 @@ $maxWidth = [
             document.body.classList.remove('overflow-y-hidden');
         }
     })"
-    x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
-    x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null"
+    x-on:open-modal.window="if ('{{ $name }}') { $event.detail == '{{ $name }}' ? show = true : null }"
+    x-on:close-modal.window="if ('{{ $name }}') { $event.detail == '{{ $name }}' ? show = false : null }"
     x-on:close.stop="show = false"
     x-on:keydown.escape.window="show = false"
     x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     x-show="show"
-    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
+    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50 dark:bg-gray-900/50"
     style="display: {{ $show ? 'block' : 'none' }};"
 >
     <div

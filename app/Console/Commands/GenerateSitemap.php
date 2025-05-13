@@ -23,7 +23,7 @@ class GenerateSitemap extends Command
             ->add(Url::create('/akademi')
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
                 ->setPriority(0.8))
-            ->add(Url::create('/masa')
+            ->add(Url::create('/masam')
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
                 ->setPriority(0.8))
             ->add(Url::create('/masa/vitrinim')

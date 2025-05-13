@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Links to project documentation files for Hekimport.
+alwaysApply: true
+---
+### Project Documentation
+- Refer to the comprehensive list of dependencies and documentation links: @docs/project-dependencies-and-docs.mdc

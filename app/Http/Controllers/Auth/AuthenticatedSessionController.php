@@ -16,11 +16,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('auth.login'); // This should point to the default /login view
     }
 
     /**
      * Handle an incoming authentication request.
+     * This controller handles requests to the default /login route.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -28,7 +29,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('masa', absolute: false));
+        // Redirect all users to /masam after login
+        return redirect('/masam');
     }
 
     /**

@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+// Import page for dentist redirection - No longer needed for redirect target
+// use App\Filament\Masam\Pages\VitrinimPage;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -41,10 +44,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // Assign 'dentist' role to all new registrants
+        $user->assignRole('dentist');
+
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect to /masam after registration
+        return redirect('/masam');
     }
 }

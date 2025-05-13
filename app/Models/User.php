@@ -12,20 +12,22 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
-    use HasProfilePhoto;
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use InteractsWithMedia;
+    use HasProfilePhoto;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +38,13 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
+        'language',
+        'timezone',
+        'contact_email',
         'assigned_doctor_id',
+        'signature',
+        'is_banned_from_forum',
+        'last_active_at',
     ];
 
     /**
@@ -70,19 +78,8 @@ class User extends Authenticatable implements FilamentUser
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_banned_from_forum' => 'boolean',
         ];
-    }
-
-    /**
-     * Determine if the user can access the Filament panel.
-     *
-     * @param \Filament\Panel $panel
-     * @return bool
-     */
-    public function canAccessPanel(Panel $panel): bool
-    {
-        // Allow all users to access for now
-        return true;
     }
 
     /**
@@ -107,5 +104,27 @@ class User extends Authenticatable implements FilamentUser
     public function personel()
     {
         return $this->hasMany(User::class, 'assigned_doctor_id');
+    }
+
+    // Forum relationships
+    public function forumMessages(): HasMany
+    {
+        return $this->hasMany(ForumMessage::class);
+    }
+
+    public function getMessageCountAttribute(): int
+    {
+        return $this->forumMessages()->count();
+    }
+
+    public function forumTopicReads(): HasMany
+    {
+        return $this->hasMany(ForumTopicUserRead::class);
+    }
+
+    public function lastReadAt(int $topicId): ?string
+    {
+        $read = $this->forumTopicReads()->where('topic_id', $topicId)->first();
+        return $read ? $read->last_read_at : null;
     }
 }

@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Guidelines for testing and project dependencies in Hekimport.
+alwaysApply: true
+---
+### Testing Guidelines
+- Write unit tests for Laravel controllers and models.
+- Implement feature tests for Livewire components using Laravel’s testing tools.
+- Use Laravel Dusk for end-to-end testing when necessary.
+
+### Dependencies
+- Laravel 12
+- Livewire
+- Alpine.js
+- TailwindCSS
+- laravel-medialibrary (for profile photo uploads)
+- laravel-filemanager (for media uploads in modals)
+- Composer for dependency management

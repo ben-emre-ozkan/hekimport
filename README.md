@@ -23,7 +23,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks.
 
 You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
@@ -59,3 +59,105 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Hekimport Test Suite
+
+Hekimport is a Laravel 12 project designed for dentists, using the TALL stack (TailwindCSS, Alpine.js, Laravel, Livewire). This document provides an overview of the test suite implementation.
+
+## Test Structure
+
+The test suite is structured into the following categories:
+
+### Unit Tests
+
+Located in the `tests/Unit` directory, these tests focus on isolated components:
+
+- **VitrinModelTest**: Tests the `Vitrin` model's relationships and methods
+- **DentalSpecialtyEnumTest**: Tests the `DentalSpecialty` enum values and localized labels
+
+### Feature Tests
+
+Located in the `tests/Feature` directory, these tests focus on feature functionality:
+
+- **AuthenticationTest**: Tests login functionality and protection of routes
+- **VitrinimModuleTest**: Tests the "vitrinim" module for profile management
+- **KlinigimPlaceholderTest**: Tests the "kliniğim" placeholder page and feedback functionality
+
+### Browser Tests (Laravel Dusk)
+
+Located in the `tests/Browser` directory, these tests simulate real user interactions:
+
+- **LoginTest**: Tests the login flow via browser automation
+- **VitrinimFlowTest**: Tests the vitrinim module user flow
+- **KlinigimFlowTest**: Tests the kliniğim module user flow
+
+## Running Tests
+
+### PHPUnit Tests (Unit & Feature)
+
+Run unit and feature tests with:
+
+```bash
+php artisan test
+```
+
+These tests run quickly and don't require a browser.
+
+### Browser Tests (Laravel Dusk)
+
+Browser tests require Chrome to be installed on the system:
+
+```bash
+php artisan dusk
+```
+
+> **Note**: If Chrome is not available in the environment, you may see errors like "session not created from unknown error: cannot find Chrome binary". In this case, you'll need to install Chrome or configure Dusk to use a different browser driver.
+
+## Test Conventions
+
+- Tests use the `RefreshDatabase` trait to ensure a clean database state between tests
+- Feature tests use LivewireTestCase to test Livewire components
+- Browser tests are designed to simulate real user interactions
+
+## Test Prerequisites
+
+- PHP 8.3+
+- Laravel 12
+- SQLite (for testing database)
+- Chrome (for Dusk tests)
+
+## Common Issues and Solutions
+
+### Validation Errors
+
+When testing forms, ensure all required fields are filled with valid data. The `VitrinimPage` component performs validation on several fields including:
+
+- title (required, min:5, max:60)
+- description (required, min:10, max:160)
+- bio (required, min:20)
+- specialty (required)
+- city (required)
+- contact_info.phone (required)
+- contact_info.email (required, email)
+
+### Working Hours Array Structure
+
+The `working_hours` array in the `Vitrin` model uses English day names ('Monday', 'Tuesday', etc.). Tests should initialize this array with all days to avoid "undefined index" errors.
+
+### Chrome Driver Issues
+
+If you encounter Chrome driver issues with Dusk tests:
+1. Ensure Chrome is installed
+2. Run `php artisan dusk:chrome-driver`
+3. Consider using the `--no-sandbox` option in the `DuskTestCase.php` file
+
+## Future Improvements
+
+- Add more comprehensive tests for service management
+- Add tests for analytics features
+- Add tests for SEO optimization features
+- Improve test coverage for error scenarios
+
+## Test Documentation
+
+For more detailed information about the testing implementation, please refer to `TESTING.md`.

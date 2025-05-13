@@ -1,0 +1,106 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class AuthenticationTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_users_can_login_with_correct_credentials(): void
+    {
+        // Arrange
+        $user = User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Act
+        $response = $this->post('/login', [
+            'email' => 'test@example.com',
+            'password' => 'password',
+        ]);
+
+        // Assert
+        $response->assertStatus(302);
+        $response->assertRedirect('/masam');
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_users_cannot_login_with_incorrect_password(): void
+    {
+        // Arrange
+        $user = User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        // Act
+        $response = $this->post('/login', [
+            'email' => 'test@example.com',
+            'password' => 'wrong-password',
+        ]);
+
+        // Assert
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('email');
+        $this->assertGuest();
+    }
+
+    public function test_users_cannot_login_with_email_that_does_not_exist(): void
+    {
+        // Arrange - No user created
+
+        // Act
+        $response = $this->post('/login', [
+            'email' => 'nonexistent@example.com',
+            'password' => 'password',
+        ]);
+
+        // Assert
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('email');
+        $this->assertGuest();
+    }
+
+    public function test_unauthenticated_user_redirected_to_login_when_accessing_protected_route(): void
+    {
+        // Act - Try to access a protected route
+        $response = $this->get('/masam/vitrinim');
+
+        // Assert - Should redirect to login
+        $response->assertStatus(302);
+        $response->assertRedirect('/login');
+    }
+
+    public function test_authenticated_user_can_access_protected_route(): void
+    {
+        // Arrange - Create and log in a user
+        $user = User::factory()->create();
+        
+        // Act - Try to access a protected route as authenticated user
+        $response = $this->actingAs($user)->get('/masam/vitrinim');
+
+        // Assert - Should allow access (200 OK)
+        $response->assertStatus(200);
+    }
+
+    public function test_logout_functionality(): void
+    {
+        // Arrange - Create and log in a user
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        // Act - Logout
+        $response = $this->post('/logout');
+
+        // Assert
+        $response->assertStatus(302); // Redirect after logout
+        $this->assertGuest(); // User should be logged out
+    }
+} 

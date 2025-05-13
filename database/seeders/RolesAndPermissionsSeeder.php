@@ -17,48 +17,65 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // Create permissions
-        $permissions = [
-            'view users',
-            'create users',
-            'edit users',
-            'delete users',
-            'view roles',
-            'create roles',
-            'edit roles',
-            'delete roles',
-            'view permissions',
-            'create permissions',
-            'edit permissions',
-            'delete permissions',
-            'view imports',
-            'create imports',
-            'edit imports',
-            'delete imports',
+        // Create roles
+        $roles = [
+            'admin',
+            'dentist',
+            'personnel',
+            'student'
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+        foreach ($roles as $roleName) {
+            Role::firstOrCreate(['name' => $roleName]);
         }
 
-        // Create roles and assign permissions
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
+        $this->command->info('Roles created successfully!');
 
-        $role = Role::create(['name' => 'manager']);
-        $role->givePermissionTo([
-            'view users',
-            'view roles',
-            'view permissions',
-            'view imports',
-            'create imports',
-            'edit imports',
+        // Create basic permissions
+        $permissions = [
+            'manage users',
+            'view dashboard',
+            'edit profile',
+            'manage clinic',
+            'manage patients',
+            'manage appointments',
+            'manage services',
+            'view reports'
+        ];
+
+        foreach ($permissions as $permissionName) {
+            Permission::firstOrCreate(['name' => $permissionName]);
+        }
+
+        // Assign permissions to roles
+        $adminRole = Role::findByName('admin');
+        $adminRole->givePermissionTo(Permission::all());
+
+        $dentistRole = Role::findByName('dentist');
+        $dentistRole->givePermissionTo([
+            'view dashboard',
+            'edit profile',
+            'manage clinic',
+            'manage patients',
+            'manage appointments',
+            'manage services',
+            'view reports'
         ]);
 
-        $role = Role::create(['name' => 'user']);
-        $role->givePermissionTo([
-            'view imports',
-            'create imports',
+        $personnelRole = Role::findByName('personnel');
+        $personnelRole->givePermissionTo([
+            'view dashboard',
+            'edit profile',
+            'manage patients',
+            'manage appointments'
         ]);
+
+        $studentRole = Role::findByName('student');
+        $studentRole->givePermissionTo([
+            'view dashboard',
+            'edit profile'
+        ]);
+
+        $this->command->info('Permissions assigned to roles successfully!');
     }
 }

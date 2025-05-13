@@ -20,43 +20,43 @@
     [ ] Implement Real-time Preview
     Add "Preview" button to see changes before publishing
     Toggle for activating/deactivating profile
-2. Public-Facing Templates
-[ ] Design Profile Layout
-Check resources/views/vitrin.blade.php for existing template
-Create responsive layout with Tailwind CSS
-Implement mobile-friendly design
-[ ] Build Component Structure
-Header with dentist info and profile image
-Services section with prices and descriptions
-Working hours table/calendar
-Contact information section
-Gallery/media section
-Testimonials area (if applicable)
-[ ] Add Schema.org Markup
-Implement LocalBusiness schema
-Add MedicalOrganization and Dentist schema types
-Configure rich snippets for Google search
-[ ] Create Page Sections
-About section with professional background
-Services with detailed descriptions
-Education and certifications display
-Contact form with validation
-3. Subdomain Routing System
-[ ] Verify Current Implementation
-Check existing route in routes/web.php: Route::domain('{slug}.hekimport.local')
-Test subdomain routing locally with /etc/hosts modifications
-[ ] Configure Production Environment
-Update DNS settings for wildcard subdomains (.hekimport.com)
-Set up Nginx/Apache config for subdomain handling
-Configure SSL for wildcard subdomains
-[ ] Implement Subdomain Middleware
-Create middleware to handle subdomain resolution
-Add caching for frequent subdomain lookups
-Implement not-found handling for invalid subdomains
-[ ] Add Custom Domain Support
-Build interface for dentists to add custom domains
-Create verification system for domain ownership
-Implement DNS record suggestions
+    2. Public-Facing Templates
+    [ ] Design Profile Layout
+    Check resources/views/vitrin.blade.php for existing template
+    Create responsive layout with Tailwind CSS
+    Implement mobile-friendly design
+    [ ] Build Component Structure
+    Header with dentist info and profile image
+    Services section with prices and descriptions
+    Working hours table/calendar
+    Contact information section
+    Gallery/media section
+    Testimonials area (if applicable)
+    [ ] Add Schema.org Markup
+    Implement LocalBusiness schema
+    Add MedicalOrganization and Dentist schema types
+    Configure rich snippets for Google search
+    [ ] Create Page Sections
+    About section with professional background
+    Services with detailed descriptions
+    Education and certifications display
+    Contact form with validation
+    3. Subdomain Routing System
+    [ ] Verify Current Implementation
+    Check existing route in routes/web.php: Route::domain('{slug}.hekimport.local')
+    Test subdomain routing locally with /etc/hosts modifications
+    [ ] Configure Production Environment
+    Update DNS settings for wildcard subdomains (.hekimport.com)
+    Set up Nginx/Apache config for subdomain handling
+    Configure SSL for wildcard subdomains
+    [ ] Implement Subdomain Middleware
+    Create middleware to handle subdomain resolution
+    Add caching for frequent subdomain lookups
+    Implement not-found handling for invalid subdomains
+    [ ] Add Custom Domain Support
+    Build interface for dentists to add custom domains
+    Create verification system for domain ownership
+    Implement DNS record suggestions
 4. Media Management Integration
 [ ] Verify Spatie MediaLibrary Integration
 Check model for InteractsWithMedia trait use
@@ -135,3 +135,208 @@ Run php artisan route:list to verify endpoints aren't duplicated
 Use php artisan migrate:status to check migration status before creating new ones
 Test with php artisan test --filter=Vitrin after implementing features
 Review existing code patterns to maintain consistency
+
+
+
+
+
+
+
+
+
+
+    Dashboard Redesign & Enhancement To Do List
+    1. Analyze the Current State
+    [ ] Review the current /dashboard page (UI and code):
+    [ ] What components are present? (Quick Access, Profile Summary, Recent Activities)
+    [ ] Which modules are accessible? (Vitrinim, Kliniğim, Masam)
+    [ ] What is the navigation structure? (Simple top menu, no sidebar)
+    [ ] Assess user experience and visual quality
+    [ ] Which technologies are used? (Tailwind, Blade, classic Laravel layout)
+    [ ] Identify missing features or areas lacking user-friendliness
+    2. Define Needs and Goals
+    [ ] There should be a modern, fixed sidebar navigation (using Filament UI)
+    [ ] The sidebar should include:
+    [ ] Vitrinim
+    [ ] Kliniğim
+    [ ] Masam (or main panel)
+    [ ] Profile/settings
+    [ ] Logout
+    [ ] The main dashboard should feature:
+    [ ] Welcome message for the user
+    [ ] Short profile summary and avatar
+    [ ] Recent activities or notifications
+    [ ] Quick access cards/shortcuts to modules
+    [ ] (If available) Statistics, charts, or widgets
+    [ ] Ensure mobile responsiveness and accessibility
+    [ ] Use Filament’s ready-made UI components for a modern, clean look
+    3. Design & Development Steps
+    [ ] Check required composer packages and configuration for Filament panel structure
+    [ ] Create a Filament panel with a sidebar navigation
+    [ ] Add necessary modules to the navigation menu
+    [ ] Redesign the main dashboard page using Filament widgets and cards
+    [ ] Add a widget for user profile info and avatar
+    [ ] Create a section for recent activities/notifications
+    [ ] Add quick access/shortcut cards
+    [ ] (Optional) Add statistics or chart widgets
+    [ ] Use Tailwind and Filament’s built-in styles for design
+    [ ] Test for both mobile and desktop compatibility
+4. Testing & Final Checks
+[ ] Test all navigation links and module access
+[ ] Ensure widgets and cards display correct data
+[ ] Log in with different user types (dentist, student, staff) and test the panel
+[ ] Test mobile and desktop views
+[ ] Review user experience and visual quality
+[ ] (Optional) Get feedback from users/team and make final adjustments
+
+
+
+Missing Features
+Sidebar Navigation: No dedicated sidebar for easy module navigation
+Visual Data/Statistics: No data visualizations or statistics
+Notifications: No visible notification system
+Activity Logging: Placeholder for activities but no actual implementation
+Modern UI Components: Basic UI with limited use of modern components
+Personalization: Limited personalization options
+Quick Actions: Limited quick actions for common tasks
+
+
+Vitrinim Module Rebuild: Detailed Implementation Plan
+1. Initial Setup & Analysis
+[ ] Analyze the current Vitrinim structure in the codebase
+[ ] Validate Filament dependencies in composer.json (check for filament/filament version 3.x)
+[ ] Ensure Laravel Vite configuration is set up correctly for Filament assets
+[ ] Verify the Vitrin model structure and relationships (app/Models/Vitrin.php)
+2. Create Custom Filament Panel
+[ ] Configure the VitrinimPanelProvider in app/Providers/Filament/VitrinimPanelProvider.php:
+[ ] Register the panel provider in bootstrap/providers.php
+[ ] Create custom CSS theme for Vitrinim panel in resources/css/filament/vitrinim/theme.css
+3. Create Core Pages and Resources
+Dashboard
+[ ] Create custom dashboard page:
+[ ] Implement dashboard layout with statistics cards and quick access features
+Website Management
+[ ] Create Vitrin Profile resource:
+[ ] Define form schema in VitrinResource/Pages/EditVitrin.php:
+Media Management
+[ ] Create MediaManager page:
+[ ] Implement the media library with Spatie MediaLibrary integration in MediaManager.php:
+Visibility Management
+[ ] Create VisibilitySettings page:
+[ ] Implement visibility controls and availability settings
+Patient Management
+[ ] Create Patient resource:
+[ ] Implement patient listing, details, and communication features
+Analytics Dashboard
+[ ] Create AnalyticsDashboard page:
+[ ] Implement charts, metrics cards, and statistics widgets
+4. Custom Widgets
+[ ] Create statistics overview widget:
+[ ] Create profile completeness widget:
+[ ] Create latest patients widget:
+[ ] Create analytics chart widget:
+5. Navigation & UI Configuration
+[ ] Configure the navigation structure in VitrinimPanelProvider.php:
+6. Integration with Existing System
+[ ] Update route definitions in routes/web.php:
+[ ] Create migration for any new database fields:
+[ ] Update the masam dashboard to link to the new Vitrinim panel
+7. Advanced Features Implementation
+[ ] Create page preview system with live rendering
+[ ] Implement SEO analysis service with recommendations
+[ ] Create patient appointment integration using action buttons
+[ ] Implement real-time notifications using Laravel Echo
+[ ] Configure analytics data collection via AJAX endpoints
+8. Testing & QA
+[ ] Write feature tests for the main Vitrinim functionality:
+[ ] Test responsible layout on different screen sizes
+[ ] Perform database query optimization and N+1 query prevention
+[ ] Validate all form inputs with appropriate rules
+[ ] Test UI with different users and permissions
+9. Deployment & Documentation
+[ ] Create migrations for any schema changes
+[ ] Create seeders for demo/test data
+[ ] Update the readme with module documentation
+[ ] Prepare user onboarding guides
+[ ] Configure caching for optimized performance
+Implementation Notes
+The new panel will completely replace the existing Livewire implementation
+Users will be redirected from old URLs to the new Filament panel paths
+Alpine.js conflicts will be resolved by using Filament's built-in implementation
+Use Filament's built-in notifications and validation for consistent UX
+This detailed plan provides a comprehensive roadmap for rebuilding the Vitrinim module using Filament, maintaining data compatibility while completely modernizing the user interface and experience.
+
+
+
+
+
+
+
+
+
+
+
+    Prompt 1: Implement Panel Access Control
+    Goal: Prevent authenticated users from accessing Filament panels for which they do not have the correct role by manually typing the URL.
+    Tasks:
+    Modify app/Models/User.php:
+    Ensure the class implements Filament\Models\Contracts\FilamentUser.
+    Ensure the use Filament\Panel; import exists.
+    Locate or create the canAccessPanel(Panel $panel): bool method.
+    Implement Role Checks within canAccessPanel:
+    Replace the current content of the method (likely return true;) with the following logic:
+    Apply to prompt.txt
+    Verify Panel IDs: Double-check the exact IDs configured in app/Providers/Filament/AdminPanelProvider.php (->id('...')) and app/Providers/Filament/HekimportPanelProvider.php (->id('...')). Adjust the if ($panel->getId() === '...') checks in the code above to match the actual IDs used in your providers.
+    Prompt 2: Perform Manual User Actions (For User)
+    (This prompt describes actions the user needs to take manually)
+    Goal: Ensure the frontend UI directs users correctly and existing user accounts have the necessary roles assigned for the new authentication flow to work.
+    Tasks:
+    Update Frontend Login Links:
+    Action: Manually search through your project's Blade templates (primarily in resources/views/layouts, resources/views/components, resources/views/welcome.blade.php, etc.).
+    Find: Locate any HTML anchor tags (<a>) or button elements intended for dentists to log in, which currently have href="/login" or href="{{ route('login') }}".
+    Replace: Change the href attribute to point to the Masam panel's specific login route: href="/masam/login" or ideally href="{{ route('filament.masam.auth.login') }}".
+    Assign Roles to Existing Users:
+    Identify Users: Determine which existing users in your users table should have the 'dentist' role (e.g., kerem@gmail.com).
+    Find IDs: Note the id for each of these users. Also, find the id of the 'dentist' role in your roles table.
+    Assign via Tinker (Example):
+    Run php artisan tinker.
+    Execute commands like the following, replacing USER_ID and ROLE_NAME:
+    Apply to prompt.txt
+    Assign via Database Tool: Alternatively, use a database administration tool to directly insert records into the model_has_roles table. For each dentist user, add a row containing their user_id, the role_id for 'dentist', and the model_type as App\Models\User.
+    Prompt 3: Create Feature Tests for Authentication & Authorization
+    Goal: Create automated tests to verify user registration, role assignment, login redirection, middleware behavior, and panel access control.
+    Tasks:
+    Create Test File: Run php artisan make:test Auth/PanelAuthenticationTest in your terminal.
+    Add use RefreshDatabase;: Add the RefreshDatabase trait to your new test class.
+    Implement Test Methods: Write test methods covering the following scenarios within tests/Feature/Auth/PanelAuthenticationTest.php:
+    Registration:
+    test_new_users_are_assigned_dentist_role_on_registration(): Simulate a POST request to /register, assert a User record is created, assert the user hasRole('dentist'), assert the response redirects to /masam.
+    Dentist Login (/masam/login):
+    test_dentist_can_login_via_masam_login_route(): Create a 'dentist' user, POST valid credentials to /masam/login, assert authentication, assert redirect to /masam.
+    test_dentist_login_fails_with_invalid_password_via_masam_login(): Create 'dentist', POST invalid password to /masam/login, assert guest status, assert no redirect or redirect back to login.
+    General Login & Redirection (/login):
+    test_dentist_redirects_to_masam_panel_via_login_route(): Create 'dentist', POST valid credentials to /login, assert auth, assert redirect to /masam.
+    test_admin_redirects_to_admin_panel_via_login_route(): Create 'admin' user, POST valid credentials to /login, assert auth, assert redirect to /admin (or relevant admin path).
+    test_other_roles_redirect_to_hekimport_panel_via_login_route(): Create 'student' or 'personnel' user, POST valid credentials to /login, assert auth, assert redirect to /dashboard (Hekimport panel path).
+    Middleware Redirection (Unauthenticated):
+    test_unauthenticated_user_is_redirected_from_masam_route(): GET request to /masam/some-page, assert redirect to /masam/login.
+    test_unauthenticated_user_is_redirected_from_admin_route(): GET request to /admin/some-page, assert redirect to /admin/login.
+    test_unauthenticated_user_is_redirected_from_hekimport_route(): GET request to /dashboard/some-page, assert redirect to /dashboard/login.
+    Panel Access Control (Authenticated):
+    test_dentist_can_access_masam_panel(): Authenticate as 'dentist', GET /masam, assert status 200.
+    test_dentist_cannot_access_admin_panel(): Authenticate as 'dentist', GET /admin, assert status 403 (Forbidden).
+    test_admin_can_access_admin_panel(): Authenticate as 'admin', GET /admin, assert status 200.
+    test_admin_cannot_access_masam_panel(): Authenticate as 'admin', GET /masam, assert status 403.
+    (Add similar tests for other roles and panels as needed based on your canAccessPanel logic)
+What else needs attention?
+Beyond these three core tasks:
+Seeder/Role Consistency: Verify that the role names used in your code ('dentist', 'admin') exactly match (case-sensitive) the names created in your RolesAndPermissionsSeeder and stored in the roles table.
+Panel ID Verification: As mentioned in Prompt 1, ensure the panel IDs checked in canAccessPanel match the IDs defined in the respective PanelProvider files.
+Error Views: Check if you have custom views for 403 Forbidden errors, or if the default Laravel/Filament views are acceptable when access is denied by canAccessPanel.
+/masam Panel UI: Once authentication and access are working, focus on building out the actual content and functionality within the masam panel, starting with the VitrinimPage (resources/views/filament/masam/pages/vitrinim-page.blade.php and app/Filament/Masam/Pages/VitrinimPage.php). Migrate the necessary forms, widgets, and logic from the old structure.
+Jetstream Teams Feature: Remember that the Jetstream "Teams" functionality (for personnel management by dentists) is separate from the global Spatie roles. You will need to implement the logic for creating/managing teams and assigning team-specific roles when you build the "Kliniğim" module. The current changes do not affect team roles.
+Clear Cache: Remember to run php artisan optimize:clear after making significant changes to controllers, middleware, or providers.
+
+
+
+
